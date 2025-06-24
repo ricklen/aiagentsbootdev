@@ -1,0 +1,21 @@
+[project]
+name = "AIAgentsBoot"
+version = "0.1.0"
+description = "Rubicon databricks accelerator"
+authors = [
+    {name = "Rick", email = "r.lenderink@rubicon.nl"},
+
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai==1.12.1",
+    "python-dotenv==1.1.0"
+   
+]
+[project.urls]
+Repository = "https://github.com/me/spam.git"
+
+
+[tool.pytest.ini_options]
+pythonpaths = ["src"]

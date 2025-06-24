@@ -1,0 +1,79 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "AI Agents devcontainer",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build":{
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": ["--init", "--env-file",".devcontainer/devcontainer.env","--env-file",".devcontainer/devcontainer.secrets.env"],
+	// "overrideCommand": false,
+	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"],
+
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils": {
+			"installZsh": true,
+			"installOhMyZsh": true,
+			"installOhMyZshConfig": true,
+			"configureZshAsDefaultShell": true
+   	 },
+	    "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
+			"plugins": "zsh-autosuggestions zsh-syntax-highlighting",
+			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions.git https://github.com/zsh-users/zsh-syntax-highlighting.git"
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				// "databricks.databricks",
+				"ms-vscode.vscode-node-azure-pack",
+				"ms-azuretools.vscode-docker",
+				"christian-kohler.path-intellisense",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"emmanuelbeziat.vscode-great-icons",
+				"njpwerner.autodocstring",
+				// "oderwat.indent-rainbow",
+				// "mtxr.sqltools",
+				// "databricks.sqltools-databricks-driver",
+				// "ptweir.python-string-sql",
+				"eamodio.gitlens",
+                "charliermarsh.ruff",
+				"tamasfe.even-better-toml"
+
+			],
+			"settings": {
+				"editor.tabSize": 4,
+				"terminal.integrated.fontFamily": "MesloLGLDZ Nerd Font Mono",
+				"terminal.integrated.fontSize": 12,
+				"terminal.integrated.fontLigatures.enabled": true,
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"terminal.integrated.profiles.linux": {
+				"zsh": {
+					"path": "/bin/zsh",
+					"icon": "terminal-ubuntu"
+				}
+				}
+        	
+		}
+	}
+},
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// if this does not work, then execute the lines manually or
+	// rename file postCreateCommand and copy content to new file "postCreateCommand.sh", 
+	// rebuild devcontainer and delete copied file
+	"postCreateCommand": "bash /workspaces/${containerEnv:REPO_NAME}/.devcontainer/postCreateCommand.sh"
+
+	// Configure tool-specific properties.
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
