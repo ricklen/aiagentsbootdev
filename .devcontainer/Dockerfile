@@ -10,8 +10,9 @@ RUN apt-get update && apt-get upgrade --yes \
 
 ENV PATH="/usr/local/go/bin:$PATH"
 ENV GOPATH="/go"
-# ENV GOROOT="/usr/local/go"
+ENV GOROOT="/go"
+ENV GOBIN="/go/bin"
 
 RUN mkdir -p /go/src /go/bin /go/pkg
-
+RUN chown -R $USER:$USER /go
 RUN go install github.com/bootdotdev/bootdev@latest
